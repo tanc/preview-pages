@@ -4,6 +4,8 @@
     <img src="{{src}}" class="page__image" width="{{width}}">
   </div>
   {{else}}
-  {{> dropzone contentType='images' multiple=false callbacks=uploadCallbacks}}
+    {{#if currentUser }}
+      {{> dropzone contentType='images' multiple=false callbacks=uploadCallbacks}}
+    {{/if}}
   {{/if}}
 </template>

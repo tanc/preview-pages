@@ -55,11 +55,11 @@ Template.pagesList.events({
       var page = Pages.findOne(pageId);
       $('#pageName').val(page.name);
       $('#pageUrl').val(page.url);
-      var attr = page._imageAttributes,
-        thumbUrl = attr.baseUrl + '/' + attr.subDirectory + '/thumbnail_big/' + attr.name + '?' + randomToken();
       // Check whether there is an uploaded image associated and if
       // so display a field so it can be deleted.
       if (typeof page.imageUrl !== 'undefined' && page.imageUrl) {
+        var attr = page._imageAttributes,
+          thumbUrl = attr.baseUrl + '/' + attr.subDirectory + '/thumbnail_big/' + attr.name + '?' + randomToken();
         $('#pageImageUrl').attr({'src': thumbUrl}).closest('.form-group').removeClass('hidden');
       }
       else {
@@ -98,6 +98,10 @@ Template.editModalPageTemplate.events({
         });
       }
       else {
+        // Load the current page data.
+        var previousPage = Pages.findOne(pageId);
+        page._imageAttributes = previousPage._imageAttributes;
+        page.imageUrl = previousPage.imageUrl;
         _.extend(page, {id: pageId});
         Meteor.call('editPage', page, function(error, result) {
           if (error) {

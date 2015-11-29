@@ -9,3 +9,21 @@ Accounts.ui.config({
 
 Template._loginButtonsLoggedOutDropdownOverride.replaces("_loginButtonsLoggedOutDropdown");
 Template._loginButtonsLoggedInDropdownOverride.replaces("_loginButtonsLoggedInDropdown");
+
+Tracker.autorun(function() {
+  if (Meteor.userId()) {
+    $('body').addClass('logged-in').removeClass('logged-out');
+  }
+  else {
+    $('body').addClass('logged-out').removeClass('logged-in');
+  }
+});
+
+Meteor.startup(function() {
+  if (Meteor.userId()) {
+    $('body').addClass('logged-in');
+  }
+  else {
+    $('body').addClass('logged-out');
+  }
+});

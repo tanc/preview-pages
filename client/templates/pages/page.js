@@ -10,6 +10,7 @@ Template.page.rendered = function() {
 
 Template.page.helpers({
   src: function() {
+    console.log(this);
     return this.imageUrl;
   },
   width: function() {

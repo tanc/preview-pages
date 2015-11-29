@@ -35,6 +35,10 @@
   margin-top: 6px;
 }
 
+.navbar {
+  border-radius: 0;
+}
+
 .hidden {
   display: none;
 }
@@ -48,9 +52,11 @@
 .page__item {
   display: table;
   width: 100%;
+  table-layout: fixed;
 }
 
 .page__preview {
+  display: table-cell;
   width: 180px;
 }
 
@@ -58,6 +64,9 @@
   display: table-cell;
   vertical-align: middle;
   width: 70%;
+  .logged-out & {
+    width: 90%;
+  }
 }
 
 .page__buttons {
