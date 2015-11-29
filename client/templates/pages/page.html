@@ -1,0 +1,9 @@
+<template name="page">
+  {{#if src}}
+  <div class="page">
+    <img src="{{src}}" class="page__image" width="{{width}}">
+  </div>
+  {{else}}
+  {{> dropzone contentType='images' multiple=false callbacks=uploadCallbacks}}
+  {{/if}}
+</template>

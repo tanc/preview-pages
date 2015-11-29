@@ -1,0 +1,8 @@
+<template name="_loginButtonsLoggedOutDropdownOverride">
+  <li id="login-dropdown-list" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown">{{i18n 'loginButtonsLoggedOutDropdown.signIn'}}{{#unless forbidClientAccountCreation}} / {{i18n 'loginButtonsLoggedOutDropdown.up'}}{{/unless}}</a>
+    <div class="dropdown-menu dropdown-menu-right">
+      {{> _loginButtonsLoggedOutAllServices}}
+    </div>
+  </li>
+</template>

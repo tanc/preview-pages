@@ -1,0 +1,67 @@
+@import "variables";
+
+.jqDropZone {
+  width: 95%;
+  margin-top: 20px;
+  margin-right: 2.5%;
+  margin-bottom: 20px;
+  margin-left: 2.5%;
+  height: 400px;
+  line-height: 400px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  color: $gray-light;
+  border: 4px dashed $gray-lighter;
+  border-radius: 20px;
+}
+.jqDropZone.in {
+  width: 100%;
+  height: 400px;
+  line-height: 400px;
+  font-size: 40px;
+}
+.jqDropZone.hover {
+  background: lawngreen;
+}
+.jqDropZone.fade {
+  transition: all 0.3s ease-out;
+  opacity: 1;
+}
+
+.form-group small {
+  line-height: 1.2;
+  display: block;
+  margin-top: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.preview {
+  height: 100px;
+  max-width: 100%;
+  margin-right: 20px;
+}
+
+.page__item {
+  display: table;
+  width: 100%;
+}
+
+.page__preview {
+  width: 180px;
+}
+
+.page__name {
+  display: table-cell;
+  vertical-align: middle;
+  width: 70%;
+}
+
+.page__buttons {
+  display: table-cell;
+  vertical-align: middle;
+  width: 20%;
+}

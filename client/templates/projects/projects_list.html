@@ -1,0 +1,67 @@
+<template name="projectsList">
+  <ol class="breadcrumb">
+    {{#if currentUser }}
+    <li><a href="/">Home</a></li>
+    {{/if}}
+    <li class="active">{{client}}</li>
+  </ol>
+  <div class="project-header m-t-lg m-b-lg">
+    <h1 class="display-1">{{client}}</h1>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>List of projects</h2>
+    </div>
+    <ul class="projects-list list-group list-group-flush">
+      {{#each projects}}
+      <li class="list-group-item">
+      {{> projectItem}}
+        </li>
+      {{/each}}
+    </ul>
+    {{#if currentUser }}
+    <div class="card-footer">
+      <a type="button" class="add-new-project btn btn-primary-outline btn-lg">Create new project</a>
+    </div>
+    {{/if}}
+  </div>
+  {{> editModalProjectTemplate}}
+</template>
+
+<template name="editModalProjectTemplate">
+  <div class="modal fade" id="editmodal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Project add</h4>
+        </div>
+
+        <form data-parsley-errors-messages-disabled>
+          <div class="modal-body">
+
+            <fieldset class="form-group">
+              <label for="projectName">Project name</label>
+              <input type="text" id="projectName" class="form-control" required>
+              <small class="text-muted">A name for your project, for example: Site version 2</small>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="projectUrl">Project url</label>
+              <input type="text" id="projectUrl" name="url" class="form-control">
+              <small class="text-muted">The last part of the url this project will be found under. This relates to the name of the project.</small>
+            </fieldset>
+
+          </div>
+
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" id="save" value="Save">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</template>

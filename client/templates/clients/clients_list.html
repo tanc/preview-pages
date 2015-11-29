@@ -1,0 +1,25 @@
+<template name="clientsList">
+  {{#if currentUser }}
+  <ol class="breadcrumb">
+    <li class="active">Clients</li>
+  </ol>
+  <div class="page-header m-t-lg m-b-lg">
+    <h1 class="display-1">Clients</h1>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>List of clients</h2>
+    </div>
+    <ul class="clients-list list-group list-group-flush">
+      {{#each clients}}
+      <li class="list-group-item">
+        {{> clientItem}}
+      </li>
+      {{/each}}
+    </ul>
+    <div class="card-footer">
+      <a type="button" class="btn btn-primary-outline btn-lg">Create new client</a>
+    </div>
+  </div>
+  {{/if}}
+</template>

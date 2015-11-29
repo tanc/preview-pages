@@ -1,0 +1,18 @@
+<template name="pageItem">
+  <div class="page__item clearfix" data-id="{{_id}}">
+    <div class="page__preview">
+      <a href="{{url}}"><img src="{{previewUrl}}" class="preview"></a>
+    </div>
+    <h4 class="page__name">
+      <a href="{{url}}">{{name}}</a>
+    </h4>
+    {{#if currentUser }}
+    <div class="page__buttons button-group" role="group" aria-label="Edit controls">
+      <div class="pull-right">
+        <a href="#" id="edit-{{_id}}" class="edit btn btn-warning">Edit</a>
+        <a href="#" id="delete-{{_id}}" class="delete btn btn-danger">Delete</a>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</template>

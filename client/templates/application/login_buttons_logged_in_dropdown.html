@@ -1,0 +1,22 @@
+<template name="_loginButtonsLoggedInDropdownOverride">
+  <li id="login-dropdown-list" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+      {{displayName}}
+      {{#with user_profile_picture}}
+      <img src="{{this}}" width="30px" height="30px" class="img-circle" alt="#" />
+      {{/with}}
+      <b class="caret"></b>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+      {{#if inMessageOnlyFlow}}
+      {{> _loginButtonsMessages}}
+      {{else}}
+      {{#if inChangePasswordFlow}}
+      {{> _loginButtonsChangePassword}}
+      {{else}}
+      {{> _loginButtonsLoggedInDropdownActions}}
+      {{/if}}
+      {{/if}}
+    </div>
+  </li>
+</template>
