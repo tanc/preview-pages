@@ -1,8 +1,16 @@
 <template name="clientItem">
-  <div class="client">
-    <h4 class="client__name">
+  <div class="client client__item clearfix" data-id="{{_id}}">
+    <h4 class="client__name pull-left">
       <a href="{{url}}">{{name}}</a>
     </h4>
+    {{#if currentUser }}
+    <div class="client__buttons button-group pull-right" role="group" aria-label="Edit controls">
+      <div class="pull-right">
+        <a href="#" id="edit-{{_id}}" class="edit btn btn-warning">Edit</a>
+        <a href="#" id="delete-{{_id}}" class="delete btn btn-danger">Delete</a>
+      </div>
+    </div>
+    {{/if}}
     <div class="client__notes">{{notes}}</div>
   </div>
 </template>

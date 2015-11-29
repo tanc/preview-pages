@@ -2,7 +2,7 @@ Template.projectsList.helpers({
   projects: function() {
     return Projects.find({
       _clientId: this._id
-    });
+    }, {sort: {weight: 1}});
   },
   client: function() {
     return this.name;
@@ -21,6 +21,42 @@ Template.projectsList.rendered = function () {
     errorTemplate: '<span></span>'
   }).on('field:error', function() {
     this.$element.addClass('form-control-error');
+  });
+  Sortable.create(projectsList, {
+    animation: 150,
+    onUpdate: function(ui) {
+      // Get the dragged html element and the one before
+      // and after it.
+      el = $(ui.item).get(0);
+      before = $(ui.item).prev().get(0);
+      after = $(ui.item).next().get(0);
+
+      // Blaze.getData takes as a parameter an html element
+      // and will return the data context that was bound when
+      // that html element was rendered.
+      if (!before) {
+        // If it was dragged into the first position grab the
+        // next element's data context and subtract one from the weight.
+        newWeight = Blaze.getData(after).weight - 1;
+      } else if (!after) {
+        // If it was dragged into the last position grab the
+        // previous element's data context and add one to the weight.
+        newWeight = Blaze.getData(before).weight + 1;
+      }
+      else
+      // Else take the average of the two weights of the previous
+      // and next elements.
+        newWeight = (Blaze.getData(after).weight +
+          Blaze.getData(before).weight)/2;
+
+      newWeight = newWeight ? newWeight : 0;
+      // Update the dragged Item's weight.
+      Meteor.call('updateProjectWeight', Blaze.getData(el)._id, newWeight, function(error, result) {
+        if (error) {
+          alert(error);
+        }
+      });
+    }
   });
 };
 

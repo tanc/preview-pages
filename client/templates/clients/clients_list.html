@@ -10,7 +10,7 @@
     <div class="card-header">
       <h2>List of clients</h2>
     </div>
-    <ul class="clients-list list-group list-group-flush">
+    <ul id="clientsList" class="clients-list list-group list-group-flush">
       {{#each clients}}
       <li class="list-group-item">
         {{> clientItem}}
@@ -18,8 +18,46 @@
       {{/each}}
     </ul>
     <div class="card-footer">
-      <a type="button" class="btn btn-primary-outline btn-lg">Create new client</a>
+      <a type="button" class="add-new-client btn btn-primary-outline btn-lg">Create new client</a>
     </div>
   </div>
   {{/if}}
+  {{> editModalClientTemplate}}
+</template>
+
+<template name="editModalClientTemplate">
+  <div class="modal fade" id="editmodal">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Client add</h4>
+        </div>
+
+        <form data-parsley-errors-messages-disabled>
+          <div class="modal-body">
+
+            <fieldset class="form-group">
+              <label for="clientName">Client name</label>
+              <input type="text" id="clientName" class="form-control" required>
+              <small class="text-muted">The client's name</small>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="clientUrl">Client url</label>
+              <input type="text" id="clientUrl" name="url" class="form-control">
+              <small class="text-muted">A unique url for the client. This forms the first part of the url structure.</small>
+            </fieldset>
+
+          </div>
+
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" id="save" value="Save">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
 </template>
