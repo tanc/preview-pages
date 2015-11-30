@@ -37,7 +37,7 @@ Template.page.helpers({
         }
       },
       finished: function(index, fileInfo, templateContext) {
-        var width = templateContext.width ? templateContext.width : this._imageAttributes.dimensions.width;
+        var width = templateContext.width ? templateContext.width : fileInfo.dimensions.width;
         $('.container').css({
           'width': width,
           'max-width': width

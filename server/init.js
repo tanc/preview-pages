@@ -1,7 +1,14 @@
 Meteor.startup(function() {
+
+  // Define the uploads directory.
+  var uploadsDir = process.env.UPLOADS_DIR;
+  if (typeof(uploadsDir) === 'undefined') {
+    uploadsDir = Meteor.absolutePath + '/.uploads/';
+  }
+
   UploadServer.init({
-    tmpDir: Meteor.absolutePath + '/.uploads/tmp',
-    uploadDir: Meteor.absolutePath + '/.uploads',
+    tmpDir: uploadsDir + '/tmp',
+    uploadDir: uploadsDir,
     checkCreateDirectories: true,
     overwrite: true,
     imageVersions: {
