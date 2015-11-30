@@ -45,8 +45,8 @@ Meteor.startup(function() {
       }});
 
       // Crop the thumbnail version.
-      var thumbnailPath = Meteor.absolutePath + '/.uploads/' + fileInfo.subDirectory + '/thumbnail_big/' + fileInfo.name,
-        fullPath = Meteor.absolutePath + '/.uploads/' + fileInfo.subDirectory + '/' + fileInfo.name;
+      var thumbnailPath = uploadsDir + fileInfo.subDirectory + '/thumbnail_big/' + fileInfo.name,
+        fullPath = uploadsDir + fileInfo.subDirectory + '/' + fileInfo.name;
 
       Meteor.setTimeout(function() {
         Imagemagick.crop({
