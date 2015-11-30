@@ -42,6 +42,7 @@
         </div>
 
         <form data-parsley-errors-messages-disabled>
+          <input type="hidden" id="pageId">
           <div class="modal-body">
 
             <fieldset class="form-group">
@@ -51,8 +52,13 @@
             </fieldset>
             <fieldset class="form-group">
               <label for="pageUrl">Page url</label>
-              <input type="text" id="pageUrl" name="url" class="form-control">
-              <small class="text-muted">The last part of the url this page will be found under. This relates to the name of the page.</small>
+              <input type="text" id="pageUrl" class="form-control">
+              <small class="text-muted">The last part of the url this page will be found under. This is optional and if left out the page name will be used to automatically create the url.</small>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="pageWidth">Page width</label>
+              <input type="text" id="pageWidth" class="form-control" data-parsley-type="number">
+              <small class="text-muted">You can optionally specify a page width. This can be useful if you are uploading a retina or hi-dpi image and need it to scale to a fixed width.</small>
             </fieldset>
             <fieldset class="form-group hidden">
               <img src="" id="pageImageUrl" class="preview">

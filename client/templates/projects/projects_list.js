@@ -66,6 +66,8 @@ Template.projectsList.events({
     $('#editmodal').modal('show');
     $('.form-control').val('');
     $('.form-group').removeClass('has-success');
+    // Clear any previously stored projectId value.
+    $('#projectId').val('');
   },
   'click .edit': function(e) {
     e.preventDefault();
@@ -73,6 +75,7 @@ Template.projectsList.events({
     projectId = project.attr('data-id');
     if (typeof projectId !== "undefined") {
       var project = Projects.findOne(projectId);
+      $('#projectId').val(project._id);
       $('#projectName').val(project.name);
       $('#projectUrl').val(project.url);
     }
@@ -86,20 +89,30 @@ Template.editModalProjectTemplate.events({
 
     event.preventDefault();
 
-    var projectId = Session.get('selectedItemId');
-
     var project = {
       name: $('#projectName').val(),
       url: $('#projectUrl').val().replace(/\W+/g, '-').toLowerCase(),
       _clientId: this._id
     };
 
+    // Get the projectId from the hidden form field. This will have a value if
+    // the form was populated from the edit button.
+    var projectId = $('#projectId').val();
+
     // Fall back to using the project name for the url.
     if (project.url == '') {
       project.url = project.name.replace(/\W+/g, '-').toLowerCase();
     }
 
+    // Figure out whether this url is unique and if not append a digit to the end.
+    var searchContext = {
+      '_id': {$ne: projectId},
+      '_clientId': project._clientId
+    };
+    project.url = project.url.uniqueUrl(Projects, searchContext);
+
     if (project.name != '') {
+      // Check if there is a projectId in which case this is a new Project.
       if (!projectId) {
         Meteor.call('addProject', project, function (error, result) {
           if (error) {

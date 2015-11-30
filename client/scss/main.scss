@@ -29,6 +29,35 @@
   opacity: 1;
 }
 
+.page__item .jqDropZone.in {
+  width: 133px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 12px;
+  text-indent: 0;
+}
+
+.page__item .jqDropZone {
+  width: 133px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  display: table-cell;
+  text-indent: -2000px;
+  overflow: hidden;
+  background: url(/images/no_image.png) no-repeat 0 0;
+  background-size: cover;
+  height: 100px;
+  line-height: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: $gray-light;
+  border: none;
+  border-radius: 0;
+}
+
 .form-group small {
   line-height: 1.2;
   display: block;

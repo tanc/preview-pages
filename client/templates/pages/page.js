@@ -1,8 +1,11 @@
 Template.page.rendered = function() {
+  // Modify the width of the container to fit the dimensions
+  // of the image.
   if ($('img')) {
     var width = $('img').attr('width');
     $('.container').css({
       'width': width + 'px',
+      'max-width': width + 'px',
       'padding': 0
     });
   }
@@ -10,11 +13,12 @@ Template.page.rendered = function() {
 
 Template.page.helpers({
   src: function() {
-    console.log(this);
     return this.imageUrl;
   },
   width: function() {
-    return this._imageAttributes.dimensions.width;
+    // If a width has been specified use it, otherwise fall back to
+    // the image width.
+    return this.width ? this.width : this._imageAttributes.dimensions.width;
   },
   uploadCallbacks: function() {
     var templateContext = this;
@@ -33,7 +37,11 @@ Template.page.helpers({
         }
       },
       finished: function(index, fileInfo, templateContext) {
-        $('.container').css({'max-width': fileInfo.dimensions.width});
+        var width = templateContext.width ? templateContext.width : this._imageAttributes.dimensions.width;
+        $('.container').css({
+          'width': width,
+          'max-width': width
+        });
       }
     }
   }

@@ -81,6 +81,8 @@ Template.pagesList.events({
     $('#editmodal').modal('show');
     $('.form-control').val('');
     $('.form-group').removeClass('has-success');
+    // Clear any previously stored projectId value.
+    $('#pageId').val('');
   },
   'click .edit': function(e) {
     e.preventDefault();
@@ -89,8 +91,10 @@ Template.pagesList.events({
 
     if (typeof pageId !== "undefined") {
       var page = Pages.findOne(pageId);
+      $('#pageId').val(page._id);
       $('#pageName').val(page.name);
       $('#pageUrl').val(page.url);
+      $('#pageWidth').val(page.width);
       // Check whether there is an uploaded image associated and if
       // so display a field so it can be deleted.
       if (typeof page.imageUrl !== 'undefined' && page.imageUrl) {
@@ -112,20 +116,31 @@ Template.editModalPageTemplate.events({
 
     event.preventDefault();
 
-    var pageId = Session.get('selectedItemId');
-
     var page = {
       name: $('#pageName').val(),
       url: $('#pageUrl').val().replace(/\W+/g, '-').toLowerCase(),
+      width: $('#pageWidth').val(),
       _projectId: this._id
     };
+
+    // Get the pageId from the hidden form field. This will have a value if
+    // the form was populated from the edit button.
+    var pageId = $('#pageId').val();
 
     // Fall back to using the page name for the url.
     if (page.url == '') {
       page.url = page.name.replace(/\W+/g, '-').toLowerCase();
     }
 
+    // Figure out whether this url is unique and if not append a digit to the end.
+    var searchContext = {
+      '_id': {$ne: pageId},
+      '_projectId': page._projectId
+    };
+    page.url = page.url.uniqueUrl(Pages, searchContext);
+
     if (page.name != '') {
+      // Check if there is a pageId in which case this is a new Page.
       if (!pageId) {
         Meteor.call('addPage', page, function (error, result) {
           if (error) {
@@ -152,10 +167,11 @@ Template.editModalPageTemplate.events({
   'click .delete-image': function(event) {
     event.preventDefault();
     $('#pageImageUrl').closest('.form-group').addClass('hidden');
-    var pageId = Session.get('selectedItemId');
+    var pageId = $('#pageId').val();
 
     var page = Pages.findOne(pageId);
 
+    // Reset the imageUrl and attributes to empty.
     page.imageUrl = '';
     page._imageAttributes = {};
     _.extend(page, {id: pageId});
