@@ -15,9 +15,3 @@ Meteor.publish(
     return Pages.find();
   }
 );
-
-Meteor.publish(
-  'images', function() {
-    return Images.find();
-  }
-);
