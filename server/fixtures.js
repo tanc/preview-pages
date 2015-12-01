@@ -32,12 +32,6 @@ if (Pages.find().count() === 0) {
   });
 }
 
-if (Images.find().count() === 0) {
-  Images.insert({
-    _pageId: pageIdHome
-  });
-}
-
 if (Meteor.users.find().count() === 0) {
   var userId = Accounts.createUser({
     username: 'root',
