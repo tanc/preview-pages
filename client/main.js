@@ -4,7 +4,7 @@ Meteor.subscribe('pages');
 Meteor.subscribe('images');
 
 Accounts.ui.config({
-  passwordSignupFields: "USERNAME_ONLY"
+  passwordSignupFields: "USERNAME_AND_EMAIL_CONFIRM"
 });
 
 Template._loginButtonsLoggedOutDropdownOverride.replaces("_loginButtonsLoggedOutDropdown");
