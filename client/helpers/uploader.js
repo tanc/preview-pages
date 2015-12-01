@@ -5,5 +5,5 @@ Uploader.localisation = {
   upload: "Upload",
   done: "Done",
   cancel: "Cancel",
-  dropFiles: "Drop images here"
+  dropFiles: "Drop image here"
 };
