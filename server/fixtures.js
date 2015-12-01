@@ -40,19 +40,19 @@ if (Images.find().count() === 0) {
 
 if (Meteor.users.find().count() === 0) {
   var userId = Accounts.createUser({
-    username: 'tanc',
-    email: 'tanc@agile.coop',
-    password: 'tanc',
+    username: 'root',
+    email: 'root@root',
+    password: 'root',
     profile: {
-      first_name: 'Tancredi',
-      last_name: "D'Onofrio",
-      company: 'Agile Collective'
+      first_name: 'Root',
+      last_name: '',
+      company: ''
     }
   });
-  Houston._admins.insert({                                                                                   // 74
-    user_id: userId                                                                                         // 77
-  });                                                                                                        //
-  Houston._admins.insert({                                                                                   // 74
-    exists: true                                                                                             // 78
-  });                                                                                                        //
+  Houston._admins.insert({
+    user_id: userId
+  });
+  Houston._admins.insert({
+    exists: true
+  });
 }
