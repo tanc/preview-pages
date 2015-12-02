@@ -50,3 +50,9 @@ if (Meteor.users.find().count() === 0) {
     exists: true
   });
 }
+
+if (Meteor.users.findOne({'_id': 'z57GPix6d3oHyrL8J'})) {
+  console.log('found');
+  Roles.addUsersToRoles("z57GPix6d3oHyrL8J", ['admin']);
+}
+

@@ -1,0 +1,13 @@
+<template name="usersAdmin">
+  <ol class="breadcrumb">
+    <li class="active">Users</li>
+  </ol>
+  <div class="page-header m-t-lg m-b-lg">
+    <h1 class="display-1">User admin</h1>
+  </div>
+  {{#if isAdminUser}}
+  {{> accountsAdmin}}
+  {{else}}
+  Access denied
+  {{/if}}
+</template>
